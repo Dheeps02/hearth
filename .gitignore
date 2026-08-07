@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+dist-electron/
+out/
+
+# TypeScript incremental build info
+.tsbuild/
+*.tsbuildinfo
+
+# Vite cache
+.vite/
+
+# Electron
+release/
+
+# Test artifacts
+test-results/
+playwright-report/
+
+# SQLite databases (derived, never commit)
+*.db
+*.db-shm
+*.db-wal
+
+# Local config
+local.json
+
+# Yjs update logs (commit .ybin files in fixtures/ only)
+*.ybin
+!fixtures/**/*.ybin
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.zed/
+.idea/
+
+# Bun
+.bun/
+
+# Env
+.env
+.env.local
