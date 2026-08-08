@@ -1,5 +1,7 @@
 import { app, BrowserWindow, ipcMain, shell } from 'electron'
 import { join } from 'path'
+import { pathToFileURL } from 'url'
+import { CHANNELS } from '@shared/ipc'
 
 const windowVaultMap = new Map<number, string | undefined>()
 
@@ -25,14 +27,20 @@ function createWindow(vaultPath?: string): void {
     return { action: 'deny' }
   })
 
-  const appOrigin = process.env.VITE_DEV_SERVER_URL
+  // Dev: allow anything on the Vite dev server origin.
+  // Prod: allow only the exact index.html URL. Using 'file://' as the prefix
+  // (the previous approach) allowed navigation to any file on disk.
+  // TODO: replace loadFile with a custom protocol (protocol.handle('app://'))
+  // so the renderer has a real origin and 'self' in the CSP behaves predictably.
+  const appUrl = process.env.VITE_DEV_SERVER_URL
     ? new URL(process.env.VITE_DEV_SERVER_URL).origin
-    : 'file://'
+    : pathToFileURL(join(__dirname, '../dist/index.html')).href
 
   win.webContents.on('will-navigate', (event, url) => {
-    if (!url.startsWith(appOrigin)) {
-      event.preventDefault()
-    }
+    const allowed = process.env.VITE_DEV_SERVER_URL
+      ? url.startsWith(appUrl)
+      : url === appUrl
+    if (!allowed) event.preventDefault()
   })
 
   if (process.env.VITE_DEV_SERVER_URL) {
@@ -42,7 +50,7 @@ function createWindow(vaultPath?: string): void {
   }
 }
 
-ipcMain.handle('ping', () => ({
+ipcMain.handle(CHANNELS.PING, () => ({
   electron: process.versions.electron,
   node: process.versions.node,
 }))

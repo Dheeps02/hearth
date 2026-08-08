@@ -24,10 +24,22 @@ export default defineConfig({
               external: ['better-sqlite3'],
             },
           },
+          resolve: {
+            alias: {
+              '@shared': resolve('src/shared'),
+            },
+          },
         },
       },
       preload: {
         input: 'src/preload/preload.ts',
+        vite: {
+          resolve: {
+            alias: {
+              '@shared': resolve('src/shared'),
+            },
+          },
+        },
       },
     }),
   ],

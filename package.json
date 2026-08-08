@@ -13,7 +13,7 @@
     "test": "vitest",
     "test:e2e": "playwright test",
     "rebuild": "electron-rebuild -f -w better-sqlite3",
-    "postinstall": "electron-rebuild -f -w better-sqlite3",
+    "postinstall": "electron-rebuild -w better-sqlite3",
     "astryx": "node node_modules/@astryxdesign/cli/clients/cli/bin/astryx.mjs"
   },
   "license": "AGPL-3.0-only",

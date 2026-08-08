@@ -6,6 +6,10 @@ A local-first, block-based personal knowledge base. Everything lives on your mac
 
 - [Bun](https://bun.sh) ≥ 1.0
 - [Node.js](https://nodejs.org) ≥ 20 (for native module rebuild)
+- C++ build toolchain — needed to compile `better-sqlite3` from source:
+  - **Arch Linux**: `sudo pacman -S base-devel`
+  - **Windows**: Visual Studio Build Tools with the "Desktop development with C++" workload
+  - **macOS**: `xcode-select --install`
 
 ## Install
 
