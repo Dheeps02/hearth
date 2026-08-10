@@ -110,7 +110,7 @@ The cell renders with a red highlight and the original value visible, so the use
 
 After applying, `type_synced_at` is updated.
 
-Every application runs in one transaction tagged `'schema'`, so it is a single undo step (D015). Combined with vault-doc snapshots (`08_version_history.md`), applying a type update is now fully reversible — previously it was not.
+Every application runs in one transaction tagged `'schema'`, so it is a single undo step (D015). Combined with vault-doc snapshots (`design/version-history.md`), applying a type update is now fully reversible — previously it was not.
 
 ---
 

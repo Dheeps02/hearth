@@ -24,7 +24,7 @@ Scope boundary is defined in D024. This document details what is in.
 - Inline DB embed (linked view of a database)
 - `columnList` / `column` — from `@blocknote/xl-multi-column` (D013)
 
-Synced blocks are deferred. Schema and read/write hooks exist (`04_architecture.md`).
+Synced blocks are deferred. Schema and read/write hooks exist (`design/deferred.md`).
 
 ### Multi-Column
 
@@ -60,7 +60,7 @@ Mention **labels** are indexed for search; mention UUIDs are not (D006).
 - Cover image (local file in `assets/`)
 - Subpages (infinite nesting)
 - Page templates (stored pages used as starting points)
-- Version history (`08_version_history.md`)
+- Version history (`design/version-history.md`)
 
 ---
 
@@ -93,7 +93,7 @@ Covered: page deletion, property type changes, timeline bar drags, select-option
 
 No Recents section.
 
-Full behaviour in `10_navigation.md`.
+Full behaviour in `design/navigation.md`.
 
 ---
 
@@ -178,7 +178,7 @@ Types are reusable property schemas used as **starting points**.
 - The database surfaces a quiet "updates available" affordance; the user opens a diff and chooses
 - A database can have no type at all
 
-Full behaviour in `09_types_templates.md`.
+Full behaviour in `design/types.md`.
 
 ---
 
@@ -190,7 +190,7 @@ Full behaviour in `09_types_templates.md`.
 - `d3-force` simulation in a Worker, Canvas 2D rendering (D022)
 - Local (side panel) and global (full-page tab) modes
 
-Full design in `05_graph.md`.
+Full design in `design/graph.md`.
 
 ---
 
@@ -232,4 +232,4 @@ CSV import is deferred.
 - User-labeled versions kept indefinitely; auto-snapshots pruned after the retention window
 - Restore applies a diff as operations, never a full replace (D017)
 
-Full design in `08_version_history.md`.
+Full design in `design/version-history.md`.

@@ -33,7 +33,7 @@ The partial unique index enforces exactly one active tab in the database rather 
 
 `page_id` has no foreign key — `local.db` and `vault.db` are separate files, and SQLite cannot reference across databases. Dangling IDs are expected and handled by the tombstone behaviour below.
 
-Full DDL, plus the device-local `tree_collapse` table, is in `03_schema.md`.
+Full DDL, plus the device-local `tree_collapse` table, is in `reference/schema.md`.
 
 ### Behaviours
 
@@ -106,7 +106,7 @@ FTS5 matches and hands back rowids; indexed columns do the rest.
 
 `before:` and `after:` read `blocks.updated_at`, which is copied from the ydoc rather than generated during projection (D025). Were it generated, every "Rebuild" would reset these facets to the rebuild date.
 
-Filtering or sorting by Title, Created at or Updated at goes through the property resolver (D009, `06_db_views.md`), not through `props`.
+Filtering or sorting by Title, Created at or Updated at goes through the property resolver (D009, `design/databases.md`), not through `props`.
 
 ### Actions
 
@@ -205,7 +205,7 @@ No prompt, no modal.
 
 ## Settings Surface
 
-No settings table (`03_schema.md`).
+No settings table (`reference/schema.md`).
 
 **Vault settings** — `vaultDoc.settings`, synced. Retention window, cascade behaviour, export schedule and destination, alphabetical sort preferences.
 

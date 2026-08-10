@@ -89,6 +89,6 @@ Syncing an append-only log per device sidesteps the problem entirely. Updates ar
 
 ## Deferred to Post-v1
 
-See D024 for the full boundary and `04_architecture.md` for what each deferred feature leaves behind.
+See D024 for the full boundary and `design/deferred.md` for what each deferred feature leaves behind.
 
 Headline items: Formula properties, synced blocks, MCP server, Chart view, DB automations, CSV import, comments, collaborative presence.

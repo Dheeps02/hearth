@@ -103,7 +103,7 @@ Title, Created at and Updated at are not stored values. `created_at` and `update
 
 Properties gain `system_key TEXT` (`'title' | 'created_at' | 'updated_at' | null`) rather than relying on `is_system` plus a name match, which breaks when the user renames Title.
 
-A single resolver returns the SQL expression for any property. Filters, sorts, board grouping and rollup targets all call it. See `06_db_views.md`.
+A single resolver returns the SQL expression for any property. Filters, sorts, board grouping and rollup targets all call it. See `design/databases.md`.
 
 `updated_at` advances only on content-bearing changes — not on projection churn, cursor movement or view config edits.
 
@@ -221,7 +221,7 @@ Policy: full history within the retention window (default 30 days); beyond it, c
 ## D019 — Types are provenance, sync is manual and pull-only
 **Status:** active · **Supersedes:** permanent live link, "the type always wins"
 
-The previous model — permanent link, automatic propagation, no merge, type wins on conflict — was the app holding an opinion about the user's schema, which contradicts the stated philosophy (`01_overview.md`).
+The previous model — permanent link, automatic propagation, no merge, type wins on conflict — was the app holding an opinion about the user's schema, which contradicts the stated philosophy (`overview.md`).
 
 New model: a database records which type it came from. Type changes **never** push, never prompt, never auto-apply. The database surfaces a quiet "updates available" affordance; the user opens a diff and picks what to apply.
 
@@ -261,7 +261,7 @@ A full rebuild on a large vault takes tens of seconds. It must never look like a
 - Build FTS5 **after** bulk insert. Let the triggers fire per row and indexing becomes the bottleneck
 - Release each page doc immediately after projecting it. `gc: false` means a materialised doc carries all its tombstones; holding 5,000 of them at once is the difference between a rebuild and an out-of-memory crash
 
-Rebuild is triggered by a version mismatch, a missing or corrupt database, or the "Rebuild" palette command (`10_navigation.md`).
+Rebuild is triggered by a version mismatch, a missing or corrupt database, or the "Rebuild" palette command (`design/navigation.md`).
 
 ---
 
@@ -307,7 +307,7 @@ Formula remains deferred (D024). Its expression evaluator is an **open** choice 
 
 **Deferred:** Formula, synced blocks, MCP server, Chart view, DB automations, button properties, CSV import, comments, real-time collaboration presence, `created_by`/`updated_by`, Blueprint formula editor, nested table subgroups, configurable null sort positioning, unlinked-property recovery UI, type versioning.
 
-Deferred does not mean unplanned. See `04_architecture.md` for the stub each one leaves behind.
+Deferred does not mean unplanned. See `design/deferred.md` for the stub each one leaves behind.
 
 ---
 
@@ -316,7 +316,7 @@ Deferred does not mean unplanned. See `04_architecture.md` for the stub each one
 
 A Yjs update carries a client ID and a logical clock. It carries no wall-clock time. Any timestamp the projector invents at projection time is therefore a **projection artifact**, not a fact about the document — and because a full rebuild reprojects everything (D020), it would stamp every block in the vault with the rebuild date.
 
-Rebuild is the sync path and the recovery path. It runs often. Silently destroying every authored timestamp on each run is not acceptable, and it would break the `before:` and `after:` search facets (`10_navigation.md`).
+Rebuild is the sync path and the recovery path. It runs often. Silently destroying every authored timestamp on each run is not acceptable, and it would break the `before:` and `after:` search facets (`design/navigation.md`).
 
 So authored timestamps are content:
 

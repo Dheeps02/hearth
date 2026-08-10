@@ -10,7 +10,7 @@ Consequences that shape every decision below:
 - **`position` is a local projection** (D011). Never synced.
 - **Authored timestamps come from the ydoc** (D025). The projector copies them, never generates them.
 
-The authoritative CRDT layout lives in `04_architecture.md`.
+The authoritative CRDT layout lives in `reference/crdt.md`.
 
 ---
 
@@ -82,7 +82,7 @@ Keyed by property UUID. Only set values are present; absent key means empty.
 Reserved keys:
 
 - `_computed` — materialized Rollup and Lookup values (D023). Makes them filterable and sortable in SQL. **Projection-only** — written by the projector into this column, never present in `ydoc.getMap('props')`, because derived values must not sync (D011)
-- `_errors` — per-cell flags, e.g. a failed datatype conversion (`09_types_templates.md`). Synced, since a conversion failure is a fact about the data, not a derivation
+- `_errors` — per-cell flags, e.g. a failed datatype conversion (`design/types.md`). Synced, since a conversion failure is a fact about the data, not a derivation
 
 Relation values are **not** stored here — see `relations`.
 
@@ -157,7 +157,7 @@ Both computed during projection, never synced (D011):
 
 `created_at` and `updated_at` are **block attributes in the `Y.XmlFragment`**, copied through by the projector. They are not generated at projection time.
 
-If they were, every full rebuild would restamp the entire vault with the rebuild date — and rebuild is the sync path, not an exceptional recovery step. The `before:` and `after:` search facets in `10_navigation.md` depend on these being real.
+If they were, every full rebuild would restamp the entire vault with the rebuild date — and rebuild is the sync path, not an exceptional recovery step. The `before:` and `after:` search facets in `design/navigation.md` depend on these being real.
 
 ### FTS5 index (D006)
 
@@ -303,7 +303,7 @@ CREATE UNIQUE INDEX ux_props_system ON properties(database_id, system_key)
 
 Identifying Title by name breaks when the user renames it. `system_key` is stable and self-documenting, and the partial unique index guarantees exactly one of each per database.
 
-`created_at` and `updated_at` are **not** in the type enum. They are system columns, surfaced through the resolver in `06_db_views.md`.
+`created_at` and `updated_at` are **not** in the type enum. They are system columns, surfaced through the resolver in `design/databases.md`.
 
 `formula` remains in the enum though deferred — the column type exists so no rebuild is needed when it ships.
 
@@ -387,7 +387,7 @@ CREATE INDEX ix_selopt_parent ON select_options(parent_option_id);
 
 `parent_option_id` drives dependent selects: Type = "Bug" shows Severity options, Type = "Feature" shows Priority options.
 
-`position` orders the option list in pickers. Board **column** order is separate and lives in view config (`06_db_views.md`) — a view-level concern, not a schema-level one.
+`position` orders the option list in pickers. Board **column** order is separate and lives in view config (`design/databases.md`) — a view-level concern, not a schema-level one.
 
 ---
 
@@ -455,7 +455,7 @@ CREATE UNIQUE INDEX ux_views_default ON views(database_id) WHERE is_default = 1;
 
 `chart` stays in the enum though the view is deferred (D024) — closed enum, cheap to keep.
 
-Config shapes per view type are in `06_db_views.md`.
+Config shapes per view type are in `design/databases.md`.
 
 ---
 
@@ -558,7 +558,7 @@ CREATE INDEX ix_versions_auto ON versions(created_at) WHERE label IS NULL;
 
 A Yjs snapshot is a state vector plus delete set — kilobytes, not a document copy (D017).
 
-**This table is the one exception to "SQLite is disposable."** Snapshots must survive reprojection, so they are written back into the update log as vault-level metadata. See `08_version_history.md`.
+**This table is the one exception to "SQLite is disposable."** Snapshots must survive reprojection, so they are written back into the update log as vault-level metadata. See `design/version-history.md`.
 
 ---
 
@@ -596,7 +596,7 @@ CREATE UNIQUE INDEX ux_tab_active ON tabs(is_active) WHERE is_active = 1;
 CREATE INDEX ix_tabs_pos          ON tabs(position);
 ```
 
-**No foreign keys.** SQLite cannot reference across database files, and `tabs` is in `local.db` while `pages` is in `vault.db`. Dangling `page_id` values are expected and handled as tombstone tabs (`10_navigation.md`).
+**No foreign keys.** SQLite cannot reference across database files, and `tabs` is in `local.db` while `pages` is in `vault.db`. Dangling `page_id` values are expected and handled as tombstone tabs (`design/navigation.md`).
 
 The partial unique index enforces exactly one active tab in the database rather than in application code. Scope is the vault, since a vault is a workspace (D026).
 

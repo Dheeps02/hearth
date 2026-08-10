@@ -43,7 +43,7 @@ A Rollup or Lookup on entry E depends on:
 1. The set of records linked to E through the relation property
 2. The target property's value on each of those records
 
-Both are observable. The trigger is the **projector**, not the page document — page docs load lazily (`04_architecture.md`), so an observer hung off `pageDoc` would miss changes to unloaded pages arriving from another device.
+Both are observable. The trigger is the **projector**, not the page document — page docs load lazily (`design/sync.md`), so an observer hung off `pageDoc` would miss changes to unloaded pages arriving from another device.
 
 ```ts
 // vault doc is always resident

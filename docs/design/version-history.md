@@ -84,7 +84,7 @@ pageDoc.on('update', (_update, origin) => {
 
 **Remote updates are excluded.** A snapshot represents *this* device's editing session. Snapshotting on incoming sync would produce noise proportional to other devices' activity.
 
-**Unloaded pages never snapshot.** Page docs load lazily (`04_architecture.md`), so this observer only exists for docs the user has opened. That is the correct behaviour and not a gap: a session boundary marks *this device's* editing, and a page nobody opened here was not edited here. Remote edits are captured by the originating device's own snapshots, which sync through `vaultDoc.versions`.
+**Unloaded pages never snapshot.** Page docs load lazily (`design/sync.md`), so this observer only exists for docs the user has opened. That is the correct behaviour and not a gap: a session boundary marks *this device's* editing, and a page nobody opened here was not edited here. Remote edits are captured by the originating device's own snapshots, which sync through `vaultDoc.versions`.
 
 ### createSnapshot()
 

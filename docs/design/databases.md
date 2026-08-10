@@ -127,7 +127,7 @@ Configurable null positioning is deferred (D024). SQLite supports `NULLS LAST` w
 
 ### Performance
 
-For large databases, add a generated column and index for the sorted property (D004, `03_schema.md`). Because the schema is disposable, this is free to add and remove.
+For large databases, add a generated column and index for the sorted property (D004, `reference/schema.md`). Because the schema is disposable, this is free to add and remove.
 
 ---
 

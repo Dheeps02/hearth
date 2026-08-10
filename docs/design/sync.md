@@ -124,7 +124,7 @@ function projectVault(doc: Y.Doc) {
 }
 ```
 
-Write order matters — foreign keys are enforced (`03_schema.md`). Tree before databases, databases before properties, properties before views and select options.
+Write order matters — foreign keys are enforced (`reference/schema.md`). Tree before databases, databases before properties, properties before views and select options.
 
 `projectTree` is where `position` strings are generated (D011): walk each parent's `Y.Array`, assign evenly spaced base62 keys, write them to `pages`. The array is the truth; the strings are a sort key.
 
