@@ -8,8 +8,6 @@ A view is a saved configuration — filters, sorts, grouping, column visibility 
 
 ### One query
 
-The previous design used two queries — one for filtered and sorted entry IDs, one to bulk-fetch property values — plus a pivot step in TypeScript. All of that existed because `property_values` was EAV.
-
 With values in a JSON column on `pages` (D004, D005), an entry is one row. Filters and sorts are ordinary WHERE and ORDER BY clauses.
 
 ```sql
@@ -74,7 +72,7 @@ WHERE p.parent_id = ? AND p.is_deleted = 0
   AND p.title LIKE '%draft%'
 ```
 
-Note the third condition — a Title filter, resolving to a real column. That case did not work at all under the previous design.
+Note the third condition — a Title filter, resolving to a real column.
 
 ### OR via filter groups
 

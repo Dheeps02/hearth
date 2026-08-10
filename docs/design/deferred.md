@@ -2,8 +2,6 @@
 
 > Every deferred feature leaves behind the architecture to support it. No layer gets reworked just to add a feature that was always on the roadmap.
 
-The previous version of this document claimed collaboration satisfied this. It did not — collaboration was an inversion of what owns truth, not a layer, and that is why D002 moved it to day one. The principle survives; the counterexample was removed by adopting it.
-
 Requirements for any deferred feature:
 
 1. **Schema columns exist from day one.** Since the projection is disposable (D020), this matters less than it did — a rebuild is not a migration

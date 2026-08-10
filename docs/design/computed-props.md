@@ -24,10 +24,6 @@ Computed values are written into the `props` JSON column under the reserved `_co
 
 Both devices can compute a rollup from the same shared state, so under D011 the value must not sync. Writing it would mean two devices emitting competing updates for the same derived field on every dependency change — redundant traffic at best, values flapping between two mid-recompute results at worst. The ydoc carries stored values; the projector adds the derived ones.
 
-**Why this changed.** The previous design evaluated lazily on every view load, because eager evaluation needed a reverse dependency graph — "which entries depend on this entry?" — to know what to invalidate, and a missed invalidation means silent staleness with no server to reconcile against.
-
-Under D002 that problem no longer exists. Every change arrives as an observed CRDT update, so the set of touched entries is already known. The invalidation trigger is a side effect of the sync architecture rather than machinery to be built and maintained.
-
 **What it buys:**
 
 - Computed values filter and sort in SQL like any stored value — the in-memory post-filter limitation is gone

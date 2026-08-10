@@ -654,9 +654,3 @@ local.db  (device-local, survives reprojection)
 ```
 
 16 tables plus one virtual in the projection. Two tables device-local.
-
-**Removed from the previous schema:**
-
-- `property_values` — replaced by `pages.props` (D004)
-- `property_sync_status` — removed with automatic type propagation (D019)
-- `workspaces` — a vault is a workspace (D026)

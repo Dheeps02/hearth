@@ -85,14 +85,7 @@ Entries are pages, so they appear. Excluding them would hide real structure — 
 
 ### Global — nodes
 
-The previous version of this query used an `OR` across two columns in a join condition:
-
-```sql
--- WRONG: OR in a join condition defeats both indexes, forcing a scan
-LEFT JOIN page_links pl ON pl.source_page_id = p.id OR pl.target_page_id = p.id
-```
-
-Split into a UNION ALL so each half uses its index:
+An `OR` across two columns in a join condition defeats both indexes and forces a scan, so the query uses a UNION ALL so each half uses its index:
 
 ```sql
 SELECT p.id, p.title, p.icon, p.type AS pageType,
@@ -126,9 +119,7 @@ Two queries rather than one — independent datasets, and joining them produces 
 
 ### Local — recursive CTE
 
-The previous design followed edges in one direction per hop. `page_links` rows are directional but graph *neighbourhood* is not, so a page that is only ever linked **to** — which describes most hub pages — never appeared in its own neighbourhood.
-
-Each hop must traverse both directions:
+`page_links` rows are directional but graph *neighbourhood* is not — each hop must traverse both directions:
 
 ```sql
 WITH RECURSIVE nbr(id, depth) AS (

@@ -18,8 +18,6 @@ function project(update: Uint8Array, doc: Y.Doc, pageId: string) {
 }
 ```
 
-`flatten`, `diff` and `reconstruct` survive from the previous architecture. They changed job title: they were the write path, they are now the projector. Same code, different trigger.
-
 ## Flatten (Y.XmlFragment → SQL rows)
 
 ```ts

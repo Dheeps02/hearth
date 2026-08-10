@@ -4,20 +4,6 @@ Types are reusable property schemas used as **starting points** for databases.
 
 ---
 
-## What Changed and Why (D019)
-
-The previous model: every database permanently linked to a type, the link could never be broken, type edits prompted and propagated to all linked databases, and on conflict "the type always wins — there is no merge."
-
-That is the app holding an opinion about the user's schema, which contradicts the project's stated philosophy. It also carried real cost — `property_sync_status`, `is_core`, `conversion_error`, a three-button destructive-change prompt, outdated indicators, a re-diff-on-demand flow, and derived types existing purely to keep the invariant true — in exchange for keeping multiple databases of one shape aligned, which is rare in a personal vault.
-
-The concrete failure mode: a user customises a property, the type changes independently, and sync silently overwrites their work. Datatype conversion then mutates real values with a red flag as the only recovery path.
-
-**New model:** a database records which type it came from. Type changes never push. The database surfaces a quiet "updates available" affordance; the user opens a diff and picks what to apply.
-
-Same reuse story, no state machine, and nothing ever changes data without being asked.
-
----
-
 ## Type Kinds
 
 Two kinds (`derived` is removed — it existed only so every database had a link, and links are now optional).

@@ -6,13 +6,7 @@ Snapshot creation, session boundaries, restore semantics, pruning and the histor
 
 ## Why This Still Exists
 
-Yjs stores every change, so it is reasonable to assume history comes free. It does not. Three things are missing:
-
-1. **No wall-clock time.** A Yjs update is keyed by client ID and logical clock. "Restore to yesterday at 3pm" is unanswerable from the log alone
-2. **No time travel by default.** The Y.Doc is materialized current state. Reading it as of a past moment requires `Y.snapshot()` plus `createDocFromSnapshot()`, which only works with `gc: false`
-3. **No labels**
-
-So `versions` survives, storing points in the log rather than copies of the document (D017).
+Yjs has no wall-clock timestamps, no time travel without `gc: false`, and no labels — so `versions` survives, storing points in the log rather than copies of the document (D017).
 
 ---
 
