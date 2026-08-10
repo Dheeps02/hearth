@@ -4,6 +4,43 @@ Single source of truth for architectural decisions. Design docs reference entrie
 
 **Status values:** `active` — in force. `superseded` — replaced, see the superseding entry. `open` — not yet decided.
 
+| ID | Decision | Status |
+|----|----------|--------|
+| D001 | Desktop shell: Electron | active |
+| D002 | Yjs is the source of truth | active |
+| D003 | Sync model: per-device append-only update logs | active |
+| D004 | Property values: JSON column, not EAV | active |
+| D005 | Column on `pages`, not a side table | active |
+| D006 | FTS5 indexes derived plaintext | active |
+| D007 | English-only search | active |
+| D008 | Titles are a pinned section, not unified ranking | active |
+| D009 | System properties resolve via a resolver | active |
+| D010 | String-based fractional indexing | active |
+| D011 | The CRDT owns order; positions are local projections | active |
+| D012 | License: AGPL-3.0 | active |
+| D013 | Use `@blocknote/xl-multi-column` | active |
+| D014 | Export ships in v1 | active |
+| D015 | Global undo via Y.UndoManager | active |
+| D016 | Relations keyed by shared `relation_id` | active |
+| D017 | Version history survives Yjs, in changed form | active |
+| D018 | Tombstone retention and compaction | active |
+| D019 | Types are provenance, sync is manual and pull-only | active |
+| D020 | SQLite is disposable; the update log is the artifact | active |
+| D021 | Tabs are device state | active |
+| D022 | Graph: `d3-force` for simulation, renderer decoupled | active |
+| D023 | Computed properties may materialize into `props` | active |
+| D024 | v1 scope boundary | active |
+| D025 | Authored timestamps live in the ydoc | active |
+| D026 | A vault is a workspace | active |
+
+| ID | Question | Status |
+|----|----------|--------|
+| O001 | Deleting one side of a two-way relation | open |
+| O002 | Restoring a DB entry whose parent database was deleted | open |
+| O003 | Relation ordering | open |
+| O004 | Formula expression evaluator | open |
+| O005 | Asset file naming: hash vs UUID | open |
+
 ---
 
 ## D001 — Desktop shell: Electron
